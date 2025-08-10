@@ -1,0 +1,9 @@
+source venv/bin/activate
+
+uvicorn app.main:app --reload
+
+ollama run my-coder
+
+If you modify the Modelfile, just re-run:
+
+ollama create my-coder -f Modelfile

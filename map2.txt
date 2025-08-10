@@ -1,0 +1,1 @@
+Android App (chat UI) → FastAPI endpoint → Ollama → Reply sent back → Displayed on Android
