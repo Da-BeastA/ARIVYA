@@ -21,6 +21,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def read_root():
+    return {"message": "Arivya backend is running 🚀"}
+
 @app.post("/chat")
 @app.post("/chat/")
 async def chat(request: Request):
