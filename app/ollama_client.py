@@ -2,8 +2,8 @@ import requests
 import json
 import os
 
-OLLAMA_URL = "http://localhost:11434/api/chat"
-MODEL_NAME = "my-coder"
+OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434/api/chat")
+MODEL_NAME = os.environ.get("MODEL_NAME", "arivya")
 
 chat_history = []
 
