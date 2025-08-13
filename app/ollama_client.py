@@ -33,10 +33,14 @@ def get_ollama_response(prompt: str) -> str:
         "stream": False
     }
 
-    response = requests.post(OLLAMA_URL, json=payload)
-    if response.status_code == 200:
-        message = response.json().get("message", {}).get("content", "")
-        chat_history.append({"role": "assistant", "content": message})
-        return message
-    else:
-        return f"Error: {response.status_code} - {response.text}"
+    try:
+        response = requests.post(OLLAMA_URL, json=payload, timeout=10)
+        if response.status_code == 200:
+            message = response.json().get("message", {}).get("content", "")
+            chat_history.append({"role": "assistant", "content": message})
+            return message
+        else:
+            return f"Ollama error: {response.status_code} - {response.text}"
+    except requests.exceptions.RequestException as e:
+        print(f"Error connecting to Ollama: {e}")
+        return "⚠️ Ollama service is currently unavailable. Please try again later."
